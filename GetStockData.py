@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 from os import getenv
 
-from yahoo_finance import Share
+import yfinance as yf
 
 from Logger import get_logger
 from MostRecentTradingDay import get_most_recent_trading_day
@@ -12,6 +12,20 @@ LAST_TRADING_DAY = get_most_recent_trading_day()
 
 def get_stock_data(ticker, start_date, end_date):
     try:
+        s = yf.Ticker(ticker)
+        data = yf.download(ticker, start_date, end_date)
+        if filter_stocks(s, data) or len(data) < MIN_DATA_LEN or not ensure_most_recent_data(data):
+            logger.info("Filtered data for {}".format(ticker))
+            return
+        else:
+            return data
+    except Exception as e:
+        logger.error("Daily data not found for {}, {}".format(ticker, e))
+        return
+
+
+'''def get_stock_data(ticker, start_date, end_date):
+    try:
         s = Share(ticker)
         data = s.get_historical(end_date, start_date)
         if filter_stocks(s, data) or len(data) < MIN_DATA_LEN or not ensure_most_recent_data(data):
@@ -21,7 +35,7 @@ def get_stock_data(ticker, start_date, end_date):
             return data
     except Exception as e:
         logger.error("Daily data not found for {}, {}".format(ticker, e))
-        return
+        return'''
 
 def get_time_period(last_trading_day=LAST_TRADING_DAY):
     today = datetime.strptime(last_trading_day, '%Y-%m-%d')

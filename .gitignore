@@ -3,3 +3,5 @@ env
 *.pyc
 __pycache__
 .idea
+json/client_secret.json
+json/client_secret.json

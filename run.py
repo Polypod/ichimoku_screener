@@ -7,7 +7,7 @@ from EmailSender import send_email
 from Logger import get_logger
 
 pickle_file_name = 'ichi_dict.p'
-pickle_dir = 'E;/ichimoku_screener'
+pickle_dir = '/Users/henrik/PycharmProjects/GitProjects/ichimoku_screener'
 
 logger = get_logger()
 

@@ -42,7 +42,7 @@ def get_email_addresses():
     service = discovery.build('sheets', 'v4', http=http,
                               discoveryServiceUrl=discoveryUrl)
 
-    spreadsheetId = '1yJkEd5u12niaFBPlglZO63iM4nSf-SYaXaBFhVCWX8Q'
+    spreadsheetId = '1V-osSJL6Zru5vbpBFo7a9GQEETp7a3izUxKxzP0DpOQ'
     rangeName = 'A1:A'
     result = service.spreadsheets().values().get(
         spreadsheetId=spreadsheetId, range=rangeName).execute()
